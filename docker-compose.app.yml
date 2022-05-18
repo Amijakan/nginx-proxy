@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  app: # <- Change it with your container name
+    expose:
+      - ${CONTAINER_APP_PORT}
+    environment:
+      VIRTUAL_HOST: ${APP_DOMAIN_NAME}
+      VIRTUAL_PORT: ${HOST_APP_PORT}
+      LETSENCRYPT_HOST: ${APP_DOMAIN_NAME}
+      LETSENCRYPT_EMAIL: ${EMAIL}
+    ports:
+      - ${HOST_APP_PORT}:${CONTAINER_APP_PORT}
+
+networks:
+    default:
+        external:
+            name: nginx-proxy
+
